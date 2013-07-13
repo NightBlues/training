@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 
-class Vertex(object):
+class Vertex():
 
     def __init__(self, value=None):
         self.value = value
@@ -22,7 +22,7 @@ class Vertex(object):
         return self.__unicode__()
 
 
-class Edge (object):
+class Edge ():
 
     def __init__(self, vertex_one=None, vertex_two=None):
         self.vertex_1 = vertex_one
@@ -64,7 +64,7 @@ class Edge (object):
         return self.__unicode__()
 
 
-class Graph(object):
+class Graph():
 
     def __init__(self, vertices=None, edges=None):
         # todo: check of params
