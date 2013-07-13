@@ -1,14 +1,19 @@
 # -*- coding: utf-8 -*-
+from os import _wrap_close
 import sys
 
 sys.path.append('..')
 from sortalgo.simple import *
+from sortalgo.extended import *
 
 from random import shuffle
 from time import clock
 from copy import deepcopy
 
 def timeFunc(func, times, *args):
+    """
+        Calculating time for function.
+    """
     result = []
     for x in range(times):
         start = clock()
@@ -18,7 +23,8 @@ def timeFunc(func, times, *args):
 
 
 def timeSort(func, data_size=50, data_count=10):
-    print "Testing sorting function %s (data size - %d, rand data variations - %d):"%(func.__name__, data_size, data_count)
+    """Testing the sort algorithm with given data size and count"""
+    print("\nTesting sorting function %s (data size - %d, rand data variations - %d):"%(func.__name__, data_size, data_count))
     test_data_size = data_size
     test_count = data_count
     test_data = []
@@ -31,17 +37,24 @@ def timeSort(func, data_size=50, data_count=10):
     shuffle(working_data)
     func(working_data)
     is_working = 'yes' if (working_data==best_data) else 'no'
-    print "\tis working:\t%s"%is_working
-    print "\tbest data:\t%s"% timeFunc(func, 500, best_data)
-    print "\tworse data:\t%s"% timeFunc(func, 500, worse_data)
+    print("\tis working:\t\t%s"%is_working,end='\t')
+    print("\tbest data:\t\t%.16f"% timeFunc(func, 500, best_data),end='\t')
+    print("\tworse data:\t\t%.16f"% timeFunc(func, 500, worse_data),end='\t')
     random_data_time = []
     for a in test_data:
         random_data_time.append(timeFunc(func, 5, a))
-    print "\trandom data:\t%s"% (sum(random_data_time) / test_count)
+    print("\trandom data:\t%.16f"% (sum(random_data_time) / test_count),end='\t')
 
 
-timeSort(bubble_sort, 10, 50)
-timeSort(bubble_sort, 100, 25)
-timeSort(choose_sort, 10, 50)
-timeSort(choose_sort, 100, 25)
+# working_data = [x for x in range(10)]
+# shuffle(working_data)
+# print(working_data)
+# qsort_non_recursive(working_data)
+# print(working_data)
+
+# timeSort(bubble_sort, 50, 50)
+# timeSort(choose_sort, 50, 50)
+# timeSort(insert_sort, 50, 50)
+timeSort(qsort, 200, 5000)
+timeSort(qsort_non_recursive, 200, 5000)
 
