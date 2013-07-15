@@ -2,6 +2,12 @@ __author__ = 'nightblues'
 # from __future__ import division
 
 def print_heap(h):
+    """
+    Try to draw a tree in ascii mode.
+
+    @param h: heap
+    @type h: list
+    """
     level = 0
     result = []
     accum = []
@@ -36,7 +42,18 @@ def print_heap(h):
 
 
 def insert(h, el, last=None, comp=lambda a, b: a < b):
-    """last is the last element of heap (all elements with indexes>last are being ignored)"""
+    """
+    Insert an element to the heap without breaking it.
+
+    @param h: heap
+    @param el: element to be inserted (not index)
+    @param last: the last element of heap (all elements with indexes>last are being ignored)
+    @param comp; compare function (default is lambda a, b: a < b)
+    @type h: list
+    @type el: object
+    @type last: int
+    @type comp: function
+    """
     if last is None:
         last = len(h)
     h.insert(last, el)
@@ -45,9 +62,14 @@ def insert(h, el, last=None, comp=lambda a, b: a < b):
 
 def pop(h, last=None, comp=lambda a, b: a < b):
     """
-    pop from root
+    Return first element and delete it without breaking tree.
 
-    last is the last element of heap (all elements with indexes>last are being ignored)
+    @param h: heap
+    @param last: the last element of heap (all elements with indexes>last are being ignored)
+    @param comp; compare function (default is lambda a, b: a < b)
+    @type h: list
+    @type last: int
+    @type comp: function
     """
     if last is None:
         last = len(h)-1
@@ -59,6 +81,18 @@ def pop(h, last=None, comp=lambda a, b: a < b):
 
 
 def delete(h, el_i, last=None, comp=lambda a, b: a < b):
+    """
+    Delete element @el_i it without breaking tree.
+
+    @param h: heap
+    @param el_i: index of element to be deleted
+    @param last: the last element of heap (all elements with indexes>last are being ignored)
+    @param comp; compare function (default is lambda a, b: a < b)
+    @type h: list
+    @type el_i: int
+    @type last: int
+    @type comp: function
+    """
     if last is None:
         last = len(h) - 1
     h[el_i] = h[last]
@@ -67,14 +101,36 @@ def delete(h, el_i, last=None, comp=lambda a, b: a < b):
 
 
 def pushup(h, el_i, comp=lambda a, b: a < b):
+    """
+    Push element @el_i up according heap rules for saving tree.
+
+    @param h: heap
+    @param el_i: index of element to be pushed up
+    @param comp; compare function (default is lambda a, b: a < b)
+    @type h: list
+    @type el_i: int
+    @type comp: function
+    """
     while el_i > 0 and comp(h[el_i], h[el_i // 2]):
         h[el_i], h[el_i // 2] = h[el_i // 2], h[el_i]
         el_i = el_i // 2
 
 
 def pushdown(h, el_i, last=None, comp=lambda a, b: a < b):
+    """
+    Push element @el_i down according heap rules for saving tree.
+
+    @param h: heap
+    @param el_i: index of element to be deleted
+    @param last: the last element of heap (all elements with indexes>last are being ignored)
+    @param comp; compare function (default is lambda a, b: a < b)
+    @type h: list
+    @type el_i: int
+    @type last: int
+    @type comp: function
+    """
     if last is None:
-        last = len(h)-1
+        last = len(h)
     prior_child = get_prior_child(h, el_i,last, comp)
     # print("-----")
     # print("pushdown element %d for heap:%s,child_i=%d"%(el_i,h,prior_child))
@@ -82,12 +138,21 @@ def pushdown(h, el_i, last=None, comp=lambda a, b: a < b):
         h[el_i], h[prior_child] = h[prior_child], h[el_i]
         el_i = prior_child
         prior_child = get_prior_child(h, el_i,last, comp)
-    #     print("heap: %s,el_i=%s,child_i=%s"%(h,el_i,prior_child))
+        # print("heap: %s,el_i=%s,child_i=%s"%(h,el_i,prior_child))
     # print("-----")
 
 
 def get_children(h, el_i, last=None):
-    """get both children"""
+    """
+    Return 2 children of element @el_i without disturbing elements with indexes greater than @last.
+
+    @param h: heap
+    @param el_i: index of element to be deleted
+    @param last: the last element of heap (all elements with indexes>last are being ignored)
+    @type h: list
+    @type el_i: int
+    @type last: int
+    """
     # because of indexes of list starts with 0 not 1
     # we use ((el_i+1) * 2)-1 and ((el_i+1) * 2)
     # instead of el_i * 2 and (el_i * 2)+1
@@ -103,6 +168,18 @@ def get_children(h, el_i, last=None):
 
 
 def get_prior_child(h, el_i,last=None, comp=lambda a, b: a < b):
+    """
+    Return element being greater/lower than other one depending on @comp function.
+
+    @param h: heap
+    @param el_i: index of element to be deleted
+    @param last: the last element of heap (all elements with indexes>last are being ignored)
+    @param comp; compare function (default is lambda a, b: a < b)
+    @type h: list
+    @type el_i: int
+    @type last: int
+    @type comp: function
+    """
     if last is None:
         last = len(h)-1
     ch = get_children(h, el_i,last)

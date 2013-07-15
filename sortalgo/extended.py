@@ -1,8 +1,10 @@
 __author__ = 'nightblues'
-
+import sys
+sys.path.append('..')
+from datastruct import heap
 from sortalgo.util import *
 
-
+# Hoare's quicksort
 def qsort(data, comp=lambda a, b: a > b, interval_a=0, interval_b=None):
     if interval_b is None:
         interval_b=len(data)-1
@@ -31,7 +33,7 @@ def qsort(data, comp=lambda a, b: a > b, interval_a=0, interval_b=None):
     if interval_b - median_index > 1:
         qsort(data, comp, median_index+1, interval_b)
 
-
+# Hoare's quicksort; non-recursive
 def qsort_non_recursive(data, comp=lambda a, b: a > b):
     intervals = []
     intervals.append((0,len(data)-1))
@@ -62,3 +64,14 @@ def qsort_non_recursive(data, comp=lambda a, b: a > b):
             intervals.append((interval_a, median_index))
         if interval_b - median_index > 1:
             intervals.append((median_index+1, interval_b))
+
+def heapsort(data,comp=lambda a,b:a>b):
+    for i in reversed(range(len(data)//2)):
+        heap.pushdown(data,i)
+    last = len(data)-1
+    for i in range(len(data)):
+        data.append(heap.pop(data,last))
+        last-=1
+
+
+

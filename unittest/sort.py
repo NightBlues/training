@@ -47,13 +47,15 @@ def timeSort(func, data_size=50, data_count=10):
 
 # working_data = [x for x in range(10)]
 # shuffle(working_data)
+# working_data = [8, 4, 5, 3, 9, 1, 6, 7, 0, 2]
 # print(working_data)
-# qsort_non_recursive(working_data)
+# heapsort(working_data)
 # print(working_data)
 
-# timeSort(bubble_sort, 50, 50)
-# timeSort(choose_sort, 50, 50)
-# timeSort(insert_sort, 50, 50)
-timeSort(qsort, 200, 5000)
-timeSort(qsort_non_recursive, 200, 5000)
+# timeSort(bubble_sort, 100, 50)
+# timeSort(choose_sort, 100, 50)
+# timeSort(insert_sort, 100, 50)
+# timeSort(qsort, 100, 50)
+# timeSort(qsort_non_recursive, 100, 50)
+timeSort(heapsort, 100, 50)
 
