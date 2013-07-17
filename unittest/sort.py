@@ -4,7 +4,7 @@ import sys
 sys.path.append('..')
 from sortalgo.simple import *
 from sortalgo.extended import *
-
+`
 from random import shuffle
 from time import clock
 from copy import deepcopy
@@ -52,10 +52,10 @@ def timeSort(func, data_size=50, data_count=10):
 # heapsort(working_data)
 # print(working_data)
 
-# timeSort(bubble_sort, 100, 50)
-# timeSort(choose_sort, 100, 50)
-# timeSort(insert_sort, 100, 50)
-# timeSort(qsort, 100, 50)
-# timeSort(qsort_non_recursive, 100, 50)
+timeSort(bubble_sort, 100, 50)
+timeSort(choose_sort, 100, 50)
+timeSort(insert_sort, 100, 50)
+timeSort(qsort, 100, 50)
+timeSort(qsort_non_recursive, 100, 50)
 timeSort(heapsort, 100, 50)
 
