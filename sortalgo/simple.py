@@ -29,3 +29,24 @@ def insert_sort(data, comp=lambda a, b: a > b):
                 break
         if not index_to_insert == index:
             data.insert(index_to_insert, data.pop(index))
+
+
+def insert_sort_m(data, comp=lambda a,b:a>b):
+    i = 1
+    while i<len(data):
+        j = i-1
+        while j>=0 and comp(data[j], data[j+1]):
+            data[j],data[j+1]=data[j+1],data[j]
+            j-=1
+        i+=1
+
+def insert_sort_m2(data, comp=lambda a,b:a>b):
+    i = 1
+    while i<len(data):
+        cur = data[i]
+        j = i-1
+        while j>=0 and comp(data[j], cur):
+            data[j+1]=data[j]
+            j-=1
+        data[j+1]=cur
+        i+=1

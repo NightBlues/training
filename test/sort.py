@@ -45,17 +45,27 @@ def timeSort(func, data_size=50, data_count=10):
     print("\trandom data:\t%.16f"% (sum(random_data_time) / test_count),end='\t')
 
 
-# working_data = [x for x in range(10)]
+# working_data = [x for x in range(100)]
 # shuffle(working_data)
 # working_data = [8, 4, 5, 3, 9, 1, 6, 7, 0, 2]
 # print(working_data)
-# heapsort(working_data)
+# bin_insert_(working_data)
 # print(working_data)
+# if working_data==[x for x in range(100)]:
+#     print ('ok')
 
-timeSort(bubble_sort, 100, 50)
-timeSort(choose_sort, 100, 50)
-timeSort(insert_sort, 100, 50)
-timeSort(qsort, 100, 50)
-timeSort(qsort_non_recursive, 100, 50)
-timeSort(heapsort, 100, 50)
+
+# timeSort(bubble_sort, 100, 50)
+# timeSort(choose_sort, 100, 50)
+# timeSort(insert_sort, 100, 50)
+# timeSort(qsort, 100, 50)
+# timeSort(qsort_non_recursive, 100, 50)
+# timeSort(heapsort, 100, 50)
+# timeSort(insert_sort_m, 100, 50)
+# timeSort(insert_sort_m2, 10, 50)
+# timeSort(bin_insert_sort, 10, 50)
+# timeSort(insert_sort_m2, 100, 50)
+# timeSort(bin_insert_sort, 100, 50)
+# timeSort(insert_sort_m2, 500, 50)
+# timeSort(bin_insert_sort, 500, 50)
 

@@ -74,4 +74,29 @@ def heapsort(data,comp=lambda a,b:a>b):
         last-=1
 
 
-
+# inserts element into sorted list
+def bin_insert_sort(data, comp=lambda a,b:a>b):
+    j=1
+    while j<len(data):
+        insertion_place = j
+        # we cant compare element before 0, but if el is lower than everithing - insert before everithing
+        if comp(data[0], data[j]):
+            data.insert(0, data.pop(j))
+            continue
+        left=1
+        right=j
+        i=(left+right)//2
+        while right-left>0:
+            # if we've found element greater than el end prevous elemtn is lower than el
+            if comp(data[i],data[j]) and not comp(data[i-1], data[j]):
+                insertion_place = i
+                break
+            if comp(data[i],data[j]):
+                right=i
+            else:
+                # plus 1 is necessary - left must become equal or more
+                # than right if el is greater than others
+                left=i+1
+            i=(right+left)//2
+        data.insert(insertion_place, data.pop(j))
+        j+=1
