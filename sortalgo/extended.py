@@ -100,3 +100,60 @@ def bin_insert_sort(data, comp=lambda a,b:a>b):
             i=(right+left)//2
         data.insert(insertion_place, data.pop(j))
         j+=1
+
+
+def merge_procedure(data, start1,start2,end, comp=lambda a,b: a>b):
+    # merge procedure:
+    array1=data[start1:start2+1]
+    array2=data[start2+1:end+1]
+    first_list_i=0
+    second_list_i=0
+    i=start1
+    # print(array1,array2)
+    while i<end+1:
+        # print("%d: first_list_i=%d, second_list_i=%d"%(i,first_list_i,second_list_i))
+        # if first list is empty
+        if first_list_i>len(array1)-1 and second_list_i<len(array2):
+            data[i]=array2[second_list_i]
+            second_list_i+=1
+            i+=1
+            continue
+        # if second list is empty
+        if second_list_i>len(array2)-1 and first_list_i<len(array1):
+            data[i]=array1[first_list_i]
+            first_list_i+=1
+            i+=1
+            continue
+        # comparing elements from first and second lists
+        if comp(array1[first_list_i], array2[second_list_i]):
+            data[i]=array2[second_list_i]
+            second_list_i+=1
+        else:
+            data[i]=array1[first_list_i]
+            first_list_i+=1
+        i+=1
+    # print(data[start1:end+1])
+
+
+
+def merge_sort(data, start=0, end=None, comp=lambda a,b:a>b):
+    if end is None:
+        end=len(data)-1
+    middle_element = (end+start)//2
+    if middle_element-start >=1:
+        merge_sort(data, start, middle_element)
+    if end-middle_element>1:
+        merge_sort(data, middle_element+1, end)
+    merge_procedure(data, start, middle_element,end, comp)
+
+
+def merge_sort(data, start=0, end=None, comp=lambda a,b:a>b):
+    if end is None:
+        end=len(data)-1
+    middle_element = (end+start)//2
+    if middle_element-start >=1:
+        merge_sort(data, start, middle_element)
+    if end-middle_element>1:
+        merge_sort(data, middle_element+1, end)
+    merge_procedure(data, start, middle_element,end, comp)
+
