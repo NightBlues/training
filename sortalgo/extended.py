@@ -147,13 +147,3 @@ def merge_sort(data, start=0, end=None, comp=lambda a,b:a>b):
     merge_procedure(data, start, middle_element,end, comp)
 
 
-def merge_sort(data, start=0, end=None, comp=lambda a,b:a>b):
-    if end is None:
-        end=len(data)-1
-    middle_element = (end+start)//2
-    if middle_element-start >=1:
-        merge_sort(data, start, middle_element)
-    if end-middle_element>1:
-        merge_sort(data, middle_element+1, end)
-    merge_procedure(data, start, middle_element,end, comp)
-

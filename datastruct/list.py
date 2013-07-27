@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
-
+import sys
+sys.path.append('..')
+from datastruct import heap
 
 class LinkedList(object):
 
@@ -79,3 +81,37 @@ class Stack(object):
     def push(self, el):
         """el - element of stack"""
         self.data.append(el)
+
+# queue with priority
+class PriorityQueue():
+
+    def __init__(self, elements=None, comp=lambda a,b:a>b):
+        self.comp=comp
+        if elements is None:
+            self.data = []
+        else:
+            self.data=elements
+            self._make_heap()
+
+    def _make_heap(self):
+        for i in reversed(range(len(self.data)//2)):
+            heap.pushdown(self.data,i, comp=self.comp)
+
+    def isEmpty(self):
+        return not len(self.data)>0
+
+    def append(self, el):
+        self.data.append(el)
+        heap.pushup(self.data, len(self.data)-1, self.comp)
+
+    def pop(self):
+        return heap.pop(self.data, comp=self.comp)
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self.isEmpty():
+            raise StopIteration
+        else:
+            return self.pop()
