@@ -11,3 +11,11 @@ def find_min_between(data,a,b,comp=lambda a,b:a>b):
             min = i+a
     return min
 
+def minmax(data, comp=lambda a,b:a>b):
+    if len(data)==0:
+        return None
+    el = data[0]
+    for i in data:
+        if comp(el, i):
+            el = i
+    return el

@@ -3,6 +3,7 @@ import sys
 sys.path.append('..')
 
 from datastruct.list import *
+from test.util import CompEl
 
 # element = LinkedList('hi')
 # element2 = element.set_next(LinkedList('there'))
@@ -31,20 +32,6 @@ from datastruct.list import *
 #     print((stack1.pop()))
 # stack1.flush()
 # print(stack1)
-class CompEl():
-    def __init__(self, val, key):
-        self.val=val
-        self.key=key
-
-    def __unicode__(self):
-        return "<CompEl %s, %d>" %\
-         (self.val, self.key)
-
-    def __str__(self):
-        return self.__unicode__()
-
-    def __repr__(self):
-        return self.__unicode__()
 
 
 

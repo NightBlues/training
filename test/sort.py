@@ -45,11 +45,17 @@ def timeSort(func, data_size=50, data_count=10):
     print("\trandom data:\t%.16f"% (sum(random_data_time) / test_count),end='\t')
 
 
+
 # working_data = [x for x in range(10)]
+# from test.util import CompEl
+# working_data = [CompEl(chr(i)+chr(i)+chr(i), i) for i in range(97, 123)]
+# working_data.extend([CompEl(chr(i)+chr(i), i) for i in range(97, 100)])
 # shuffle(working_data)
 # working_data = [8, 4, 5, 3, 9, 1, 6, 7, 0, 2]
 # working_data = [x for x in range(0,10,2)] + [x for x in range(1,10,2)]
 # print(working_data)
+# counting_sort(working_data, key=lambda a:a.key)
+# counting_sort(working_data, key=lambda a:a)
 # merge_procedure(working_data,0,4,9)
 # merge_sort(working_data)
 # print(working_data)
@@ -74,5 +80,5 @@ def timeSort(func, data_size=50, data_count=10):
 # timeSort(bin_insert_sort, 100, 50)
 # timeSort(insert_sort_m2, 500, 50)
 # timeSort(bin_insert_sort, 500, 50)
-# timeSort(merge_sort, 500, 50)
-
+timeSort(merge_sort, 500, 50)
+timeSort(counting_sort, 500, 50)

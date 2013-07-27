@@ -1,5 +1,4 @@
 __author__ = 'NightBlues'
-
 from sortalgo.util import *
 
 # bubble sort
@@ -50,3 +49,23 @@ def insert_sort_m2(data, comp=lambda a,b:a>b):
             j-=1
         data[j+1]=cur
         i+=1
+
+def counting_sort(data, key=lambda a: a):
+    max_el = key(minmax(data, lambda a,b: key(a)<key(b)))
+    count_list = [0 for i in range(max_el+1)]
+    for i in data:
+        count_list[key(i)]+=1
+    i=1
+    while i < len(count_list):
+        count_list[i]+=count_list[i-1]
+        i+=1
+    result_list = [None for i in data]
+    for i in range(len(data)):
+        result_list[count_list[key(data[i])]-1]=data[i]
+        count_list[key(data[i])]-=1
+    i=0
+    for x in result_list:
+        data[i]=x
+        i+=1
+
+
