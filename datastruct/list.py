@@ -10,21 +10,37 @@ class LinkedList(object):
         self.nextEl = None
         self.prevEl = None
 
-    def set_next(self, el):
-        """
-        el - object of LinkedList class
-        """
-        self.nextEl = el
-        el.prevEl = self
-        return el
+    def get_tail(self):
+        """Return last element (tail)"""
+        tail = self.nextEl
+        while tail.nextEl is not None:
+            tail = tail.nextEl
+        return tail
 
-    def set_prev(self, el):
-        """
-        el - object of LinkedList class
-        """
-        self.nextEl = self
-        el.prevEl = el
-        return el
+    def get_head(self):
+        """Return first element (head)"""
+        head = self.prevEl
+        while head.prevEl is not None:
+            head = head.prevEl
+        return head
+
+    def insert(self, el):
+        """Insert element before current(self)"""
+        el.prevEl, el.nextEl = self.prevEl, self
+        self.prevEl.nextEl = el
+        self.prevEl=el
+
+    def append(self, el):
+        tail = self.get_tail()
+        el.prevEl = tail
+        tail.nextEl = el
+
+    def delete(self):
+        self.prevEl.nextEl = self.nextEl
+        self.nextEl.prevEl = self.prevEl
+
+    def search(self, value):
+        pass
 
     def __unicode__(self):
         str_position = ""
@@ -82,6 +98,54 @@ class Stack(object):
         """el - element of stack"""
         self.data.append(el)
 
+class Queue():
+    def __init__(self, length=10):
+        self.length=length+1
+        self.clear()
+
+    def enqueue(self, el):
+        if self.isFull():
+            raise OverflowError
+        self.tail = (self.tail + 1)%self.length
+        self.data[self.tail] = el
+
+    def dequeue(self):
+        if self.isEmpty():
+            return None
+        self.head = (self.head + 1)%self.length
+        element = self.data[self.head]
+        self.data[self.head] = None
+        return element
+
+    def clear(self):
+        self.head=0
+        self.tail=0
+        self.data = [None for i in range(self.length)]
+
+    def isEmpty(self):
+        return self.head == self.tail
+
+    def isFull(self):
+        return (self.tail + 1)%self.length == self.head
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self.isEmpty():
+            raise StopIteration
+        return self.dequeue()
+
+    def __unicode__(self):
+        return "<Queue, elements: (%d,%d) %s>" % (self.head,self.tail,self.data)
+
+    def __str__(self):
+        return self.__unicode__()
+
+    def __repr__(self):
+        return self.__unicode__()
+
+
 # queue with priority
 class PriorityQueue():
 
@@ -101,7 +165,7 @@ class PriorityQueue():
         return not len(self.data)>0
 
     def append(self, el):
-        self.data.append(el)
+        self.data.enqueue(el)
         heap.pushup(self.data, len(self.data)-1, self.comp)
 
     def pop(self):

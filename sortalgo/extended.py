@@ -70,7 +70,7 @@ def heapsort(data,comp=lambda a,b:a>b):
         heap.pushdown(data,i)
     last = len(data)-1
     for i in range(len(data)):
-        data.append(heap.pop(data,last))
+        data.enqueue(heap.pop(data,last))
         last-=1
 
 
