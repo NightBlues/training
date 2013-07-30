@@ -1,5 +1,5 @@
 __author__ = 'nightblues'
-from sortalgo.util import *
+from sortalgo.orderstat import *
 
 def counting_sort(data, key=lambda a: a):
     max_el = key(minmax(data, lambda a, b: key(a) < key(b)))

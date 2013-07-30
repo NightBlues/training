@@ -1,5 +1,5 @@
 __author__ = 'NightBlues'
-from sortalgo.util import *
+from sortalgo.orderstat import *
 
 # bubble sort
 def bubble_sort(data, comp=lambda a, b: a > b):

@@ -2,7 +2,7 @@ __author__ = 'nightblues'
 import sys
 sys.path.append('..')
 from datastruct import heap
-from sortalgo.util import *
+from sortalgo.orderstat import *
 
 # Hoare's quicksort
 def qsort(data, comp=lambda a, b: a > b, interval_a=0, interval_b=None):
