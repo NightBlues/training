@@ -3,66 +3,6 @@ import sys
 sys.path.append('..')
 from datastruct import heap
 
-class LinkedList(object):
-
-    def __init__(self, value=None):
-        self.value = value
-        self.nextEl = None
-        self.prevEl = None
-
-    def get_tail(self):
-        """Return last element (tail)"""
-        tail = self.nextEl
-        while tail.nextEl is not None:
-            tail = tail.nextEl
-        return tail
-
-    def get_head(self):
-        """Return first element (head)"""
-        head = self.prevEl
-        while head.prevEl is not None:
-            head = head.prevEl
-        return head
-
-    def insert(self, el):
-        """Insert element before current(self)"""
-        el.prevEl, el.nextEl = self.prevEl, self
-        self.prevEl.nextEl = el
-        self.prevEl=el
-
-    def append(self, el):
-        tail = self.get_tail()
-        el.prevEl = tail
-        tail.nextEl = el
-
-    def delete(self):
-        self.prevEl.nextEl = self.nextEl
-        self.nextEl.prevEl = self.prevEl
-
-    def search(self, value):
-        pass
-
-    def __unicode__(self):
-        str_position = ""
-        if self.prevEl is None:
-            if self.nextEl is None:
-                str_position = "only"
-            else:
-                str_position = "first"
-        else:
-            if self.nextEl is None:
-                str_position = "last"
-            else:
-                str_position = "regular"
-        return "<LinkedList element, \"%s\" (%s)>" % (self.value, str_position)
-
-    def __str__(self):
-        return self.__unicode__()
-
-    def __repr__(self):
-        return self.__unicode__()
-
-
 class Stack(object):
 
     def __init__(self):
