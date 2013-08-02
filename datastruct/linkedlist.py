@@ -94,4 +94,3 @@ class LinkedListIterator():
             self.currentEl = self.currentEl.nextEl
         return cur
 
-    
