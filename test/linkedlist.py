@@ -18,6 +18,8 @@ bad_el.delete()
 del bad_el
 print(linlist.get_tail().delete())
 linlist.search("elemental").insert("instance of")
+linlist.get_head().insert("NewHead")
+linlist = linlist.get_head()
 for e in linlist:
     print(e)
 

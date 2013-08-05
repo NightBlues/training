@@ -26,10 +26,12 @@ class LinkedList(object):
         if not isinstance(el, self.__class__):
             el = self.__class__(el)
         el.prevEl, el.nextEl = self.prevEl, self
-        self.prevEl.nextEl = el
+        if not self.isHead():
+            self.prevEl.nextEl = el
         self.prevEl = el
 
     def append(self, el):
+        """Append element to the end of the list"""
         if not isinstance(el, self.__class__):
             el = self.__class__(el)
         tail = self.get_tail()
@@ -42,10 +44,10 @@ class LinkedList(object):
         if not self.isTail():
             self.nextEl.prevEl = self.prevEl
 
-    def search(self, value):
+    def search(self, value, key=lambda k: k):
         head = self.get_head()
         for el in head:
-            if el.value == value:
+            if key(el.value) == value:
                 return el
 
     def next(self):
@@ -59,6 +61,9 @@ class LinkedList(object):
 
     def isTail(self):
         return self.nextEl is None
+
+    def isOnly(self):
+        return self.isHead() and self.isTail()
 
     def __iter__(self):
         return LinkedListIterator(self)
