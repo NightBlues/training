@@ -17,5 +17,6 @@ src = [7, 6, 4, 8, 9, 3, 5, 0, 2, 1]
 for i in src:
     bst.insert(CompEl(chr(i+97), i), lambda k:k.key)
 
-for x in bst.bfs():
-    print(x)
+bst.print_tree()
+# for x in bst.bfs():
+#     print(x)

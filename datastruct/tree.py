@@ -46,6 +46,22 @@ class BinaryTree():
                 heap.append(heap[0].r_child)
             yield heap.pop(0)
 
+    def print_tree(self):
+        print(self.get_root().__str_clean__())
+
+    def __str_clean__(self, depth = 0):
+        left = "\t" * (depth + 1) + str(None) + "\n"
+        right = "\t" * (depth + 1) + str(None) + "\n"
+        if isinstance(self.l_child, self.__class__):
+            left = self.l_child.__str_clean__(depth=depth + 1)
+        if isinstance(self.r_child, self.__class__):
+            right = self.r_child.__str_clean__(depth=depth + 1)
+        result = "\t" * depth + str(self.value) + "\n"
+        if not self.isLeaf():
+            result += str(left)
+            result += str(right)
+        return result
+
     def __unicode__(self):
         str_position = ""
         if self.isRoot():
@@ -54,7 +70,7 @@ class BinaryTree():
             str_position = "leaf"
         else:
             str_position = "regular"
-        return "<BinaryTree element, \"%s\" (%s)>" % (self.value, str_position)
+        return "<%s element, \"%s\" (%s)>" % (self.__class__.__name__, self.value, str_position)
 
     def __str__(self):
         return self.__unicode__()
@@ -85,3 +101,5 @@ class BinarySearchTree(BinaryTree):
             element.parent.set_left_child(element)
         else:
             element.parent.set_right_child(element)
+
+    # def delete(self):
