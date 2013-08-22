@@ -84,7 +84,7 @@ class BinarySearchTree(BinaryTree):
         """Is element left child of its parent or not"""
         if self.parent is None:
             return None
-        return key(self.value) < key(self.parent.value)
+        return self.parent.l_child == self
 
     def isRight(self, key=lambda k: k):
         return not self.isLeft(self, key=key)
@@ -120,7 +120,7 @@ class BinarySearchTree(BinaryTree):
             return self.r_child.min()
         parent = self.parent
         # note: not None == True
-        while not parent.isLeft(key) and parent.isLeft(key) is not None:
+        while not parent.isLeft() and parent.isLeft() is not None:
             parent = parent.parent
         return parent
 
@@ -163,7 +163,7 @@ class BinarySearchTree(BinaryTree):
         if self.isLeaf():
             if self.isRoot():
                 self.value = None
-            elif self.isLeft(key):
+            elif self.isLeft():
                 self.parent.l_child = None
             else:
                 self.parent.r_child = None
@@ -174,7 +174,7 @@ class BinarySearchTree(BinaryTree):
             ch.parent = self.parent
             if self.isRoot():
                 pass
-            elif self.isLeft(key):
+            elif self.isLeft():
                 self.parent.l_child = ch
             else:
                 self.parent.r_child = ch
@@ -184,7 +184,7 @@ class BinarySearchTree(BinaryTree):
         # this element always is the left in right subtree
         new_element_in_pos = self.r_child.min()
         # remove our replacing element from its current position
-        if new_element_in_pos.isLeft(key):
+        if new_element_in_pos.isLeft():
             new_element_in_pos.parent.l_child = new_element_in_pos.r_child
         else:
             new_element_in_pos.parent.r_child = new_element_in_pos.r_child
@@ -197,7 +197,7 @@ class BinarySearchTree(BinaryTree):
         # make parent and children of our new element learn his place
         if self.isRoot():
             pass
-        elif self.isLeft(key):
+        elif self.isLeft():
             self.parent.l_child = new_element_in_pos
         else:
             self.parent.r_child = new_element_in_pos
@@ -208,4 +208,43 @@ class BinarySearchTree(BinaryTree):
         return new_element_in_pos.get_root()
 
 
+    def left_rotate(self):
+        new_el_this_pos = self.r_child
+        if new_el_this_pos is None:
+            return
+
+        new_el_this_pos.parent = self.parent
+        if self.isRoot():
+            pass
+        elif self.isLeft():
+            self.parent.l_child = new_el_this_pos
+        else:
+            self.parent.r_child = new_el_this_pos
+
+        self.r_child = new_el_this_pos.l_child
+        if new_el_this_pos.l_child is not None:
+            new_el_this_pos.l_child.parent = self
+
+        new_el_this_pos.l_child = self
+        self.parent = new_el_this_pos
+
+    def right_rotate(self):
+        par_el = self.parent
+        if par_el is None:
+            return
+
+        self.parent = par_el.parent
+        if par_el.isRoot():
+            pass
+        elif par_el.isLeft():
+            par_el.parent.l_child = self
+        else:
+            par_el.parent.r_child = self
+
+        par_el.l_child=self.r_child
+        if par_el.l_child is not None:
+            par_el.l_child.parent = par_el
+
+        self.r_child = par_el
+        par_el.parent = self
 
