@@ -27,6 +27,10 @@ def insert_sort(data, comp=lambda a, b: a > b):
                 index_to_insert = j
                 break
         if not index_to_insert == index:
+#            cur = data[index]
+#            for j in reversed(range(index_to_insert, index)):
+#                data[j + 1] = data[j]
+#            data[index_to_insert] = cur
             data.insert(index_to_insert, data.pop(index))
 
 
