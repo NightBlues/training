@@ -145,5 +145,3 @@ def merge_sort(data, start=0, end=None, comp=lambda a,b:a>b):
     if end-middle_element>1:
         merge_sort(data, middle_element+1, end)
     merge_procedure(data, start, middle_element,end, comp)
-
-

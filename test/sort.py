@@ -4,6 +4,7 @@ import sys
 sys.path.append('..')
 from sortalgo.simple import *
 from sortalgo.extended import *
+from sortalgo.shellsort import shell_sort
 
 from random import shuffle
 from time import clock
@@ -46,14 +47,14 @@ def timeSort(func, data_size=50, data_count=10):
 
 
 
-# working_data = [x for x in range(10)]
+#working_data = [x for x in range(10)]
 # from test.util import CompEl
 # working_data = [CompEl(chr(i)+chr(i)+chr(i), i) for i in range(97, 123)]
 # working_data.extend([CompEl(chr(i)+chr(i), i) for i in range(97, 100)])
-# shuffle(working_data)
-# print(working_data)
-# sorting
-# print(working_data)
+#shuffle(working_data)
+#print(working_data)
+#shell_sort(working_data)
+#print(working_data)
 
 # print(working_data)
 # sorting
@@ -79,3 +80,5 @@ def timeSort(func, data_size=50, data_count=10):
 # timeSort(counting_sort, 500, 50)
 # timeSort(radix_sort, 500, 50)
 # timeSort(clever_radix_sort, 500, 50)
+timeSort(insert_sort, 1000, 10)
+timeSort(shell_sort, 1000, 10)
