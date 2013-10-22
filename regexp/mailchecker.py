@@ -21,15 +21,12 @@ import re
 # 7. в имени могут встречаться символы "!,:", но только между парными двойными кавычками.
 
 email_conds = []
-# cond 1
-email_conds.append([re.compile(r"[^@]+@[^@]+$"), True])
-# cond 2,3
+# cond 3
 email_conds.append([re.compile(r"@[a-z0-9_]((?![.]-|-[.])[a-z0-9_.-])+[a-z0-9_]$"), False])
-email_conds.append([re.compile(r"@[a-z0-9._-]{3,256}$"), False])
-# cond 4,5
-email_conds.append([re.compile(r'((?![.]{2})[a-z0-9"._!,:-]){0,128}@'), True])
+# cond 1,2,4,5
+email_conds.append([re.compile(r'((?![.]{2})[a-z0-9"._!,:-]){0,128}@[a-z0-9._-]{3,256}$'), True])
 # cond 6,7
-email_conds.append([re.compile(r'(("[a-z0-9._!,:-]*?")|([a-z0-9._-])+)+@'), True])
+email_conds.append([re.compile(r'(("[a-z0-9._!,:-]{0,126}")|([a-z0-9._-]){1,128}){1,128}@'), True])
 
 def check_mail(mail):
     for c in email_conds:
