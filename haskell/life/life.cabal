@@ -17,8 +17,8 @@ cabal-version:       >=1.10
 
 executable life
   main-is:             Main.hs
-  -- other-modules:       
+  -- other-modules:       Draw.hs
   -- other-extensions:    
-  build-depends:       base >=4.8 && <4.9, gloss
-  -- hs-source-dirs:      
+  build-depends:       base >=4.8, gloss
+  hs-source-dirs:      src
   default-language:    Haskell2010
