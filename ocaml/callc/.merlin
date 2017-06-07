@@ -1,0 +1,3 @@
+B _build/default
+FLG -open Mylib_ -w -40 -w -40
+S .

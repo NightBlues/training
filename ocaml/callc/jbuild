@@ -1,0 +1,11 @@
+(jbuild_version 1)
+
+
+(library
+ ((name mylib_)
+  (c_names ("mylib"))))
+
+
+(executable
+ ((name main)
+  (libraries (mylib_))))

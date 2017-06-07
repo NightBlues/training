@@ -1,2 +1,2 @@
 SRC .
-PKG glMLite
+PKG glMLite lwt.unix lwt.ppx
