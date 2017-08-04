@@ -3,6 +3,9 @@
 #include <sstream>
 #include <stdexcept>
 #include <typeinfo>
+#include <array>
+#include <algorithm>
+#include <utility>
 
 using namespace std;
 
@@ -169,10 +172,84 @@ void test_list() {
 	// }
 }
 
+
+template <class T>
+class BigInt {
+	array<T,10> blocks;
+	unsigned int halfsize;
+	T half_mask = 0;
+public:
+	BigInt(T i): halfsize(sizeof(T) * 8 / 2) {
+		for(unsigned int i = 0; i < halfsize; i++) {
+			half_mask = half_mask << 1;
+			half_mask += 0b1;
+		}
+		for(T & elt: blocks) {
+			elt = 0;
+		}
+		blocks[0] = i;
+	};
+
+	string show() {
+		ostringstream result;
+		auto blocks_cp = blocks;
+		reverse(blocks_cp.begin(), blocks_cp.end());
+		for(auto i: blocks_cp) {
+			result << i << " ";
+		}
+		return result.str();
+	}
+	
+	pair<T, T> sum(array<T, 3> nums) {
+		T result = 0, overflow = 0;
+		unsigned int halfsize = (sizeof(T) / 2);
+		result = nums[0] + nums[1];
+		overflow = result >> halfsize * 8;
+		overflow += nums[2];
+		result = result & half_mask;
+		return make_pair(result, overflow);
+	}
+
+	BigInt & operator+=(T other) {
+		T error = (other >> halfsize);
+		T next = other & half_mask;
+		for(auto &elt: this->blocks) {
+			auto res = this->sum({elt, next, error});
+			elt = res.first;
+			next = res.second;
+			error = 0;
+			// cout << "sum: " << (short)res.first << " " << (short)res.second << endl;
+			if(next == 0) {
+				break;
+			}
+		}
+
+		return *this;
+	}
+};
+
+
+void test_bigint() {
+	// array<unsigned short, 3> vals = {0b11111111, 0b11111111, 0b0};
+	// auto sum_ = sum(vals);
+	// cout << "sum: " << (short)sum_.first << " " << (short)sum_.second << endl;
+	// assertExpr(sum(vals) == (pair<unsigned short,unsigned short>)make_pair(0b1110, 0b1));
+	BigInt<unsigned short> i1(255);
+	cout << (i1.show()) << endl;
+	i1 += 255;
+	cout << (i1.show()) << endl;
+	i1 += 255;
+	cout << (i1.show()) << endl;
+	i1 += 65535;
+	cout << (i1.show()) << endl;
+
+}
+
 int main(int, char**) {
 	// MySub my1 = MySub();
 	// my1.say();
-	test_list();
+	// test_list();
+	test_bigint();
 
 	return 0;
 }
