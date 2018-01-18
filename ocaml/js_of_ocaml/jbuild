@@ -1,0 +1,7 @@
+(jbuild_version 1)
+
+(executable
+ ((name hello)
+  (libraries (js_of_ocaml))
+  (js_of_ocaml ((flags (--pretty --debug-info --source-map))))))
+  

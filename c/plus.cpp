@@ -7,6 +7,8 @@
 #include <algorithm>
 #include <utility>
 
+#include "test_framework.cpp"
+
 using namespace std;
 
 #define STAT_LIST(list); cout << list.str() << " length=" << list.length() << "; size="<< list.getSize() << endl;
@@ -120,30 +122,6 @@ public:
 };
 
 
-// My awesome test framework =)
-
-void assertTrue(string desc, bool expr) {
-	cout << "assert " << desc << " ... " << (expr ? "Ok" : "Fail") << endl;
-}
-
-void assertEqual(string v1, string v2, bool expr) {
-	assertTrue(v1 + " == " + v2, expr);
-}
-
-#define quote(x) #x
-#define assertExpr(expr); assertTrue(quote(expr), expr);
-
-#define assertExc_(expr, exc, res)  \
-	assertTrue(string("Expr \"") + quote(expr) + \
-	           string("\" throws exception ") + quote(exc), res); \
-
-#define assertFails(expr, exc); \
-	try{ \
-		expr; \
-		assertExc_(expr, exc, false); \
-	} catch(exc & e) { assertExc_(expr, exc, true); }
-
-
 void test_list() {
 	DynamicList<int> list = DynamicList<int>();
 	for(int i = 0; i < 10; i++) {
@@ -245,11 +223,54 @@ void test_bigint() {
 
 }
 
+
+template<class T>
+class TestMoves {
+public:
+	T * data;
+	TestMoves(T data_) {
+		show_id(constructor, *this);
+		cout << "normal constructor, " << data_ << endl;
+		data = new T(data_);
+	}
+
+	// TestMoves(TestMoves && obj) {
+	// 	show_id(move_constructor, *this);
+	// 	cout << "move constructor, " << *obj.data << endl;
+	// 	data = obj.data;
+	// 	obj.data = nullptr;
+	// }
+};
+
+template<class T>
+void mytempfunc(TestMoves<T> && obj) {
+	show_id(mytempfunc, obj);
+	
+}
+
+void test_moves() {
+	cout << quote(obj1) << endl;
+	TestMoves<int> obj1(101);
+	cout << quote(obj2) << endl;
+	TestMoves<int> obj2(move(obj1));
+	cout << quote(mytempfunc) << endl;
+	mytempfunc(TestMoves<int>(102));
+	cout << quote(obj3) << endl;
+	TestMoves<int> obj3(TestMoves<int>(103));
+	cout << "results:" << endl;
+	show_id(test_func, obj1);
+	show_id(test_func, obj2);
+	show_id(test_func, obj3);
+	cout << "obj3.data=" << *obj3.data <<endl;
+}
+
+
 int main(int, char**) {
 	// MySub my1 = MySub();
 	// my1.say();
 	// test_list();
-	test_bigint();
+	// test_bigint();
+	test_moves();
 
 	return 0;
 }

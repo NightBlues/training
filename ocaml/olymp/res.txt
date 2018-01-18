@@ -1,0 +1,14 @@
+fast C:
+real	0m0.792s
+user	0m0.788s
+sys	0m0.000s
+
+Haskell fast-builder:
+real	0m3.877s
+user	0m4.704s
+sys	0m0.724s
+
+OCaml batteries:
+real	0m3.703s
+user	0m3.688s
+sys	0m0.012s

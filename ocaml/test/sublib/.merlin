@@ -1,0 +1,7 @@
+B ../_build/default/sublib
+FLG -open Sublib -w -40
+FLG -ppx "../_build/default/.ppx/ppx_sexp_conv/ppx.exe --cookie 'library-name="sublib"'"
+PKG bigarray
+PKG sexplib
+PKG sexplib.0
+PKG unix

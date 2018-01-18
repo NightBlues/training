@@ -1,0 +1,9 @@
+B ../_build/default/src
+B ../_build/default/sublib
+FLG -ppx "../_build/default/.ppx/ppx_sexp_conv/ppx.exe --as-ppx"
+FLG -w -40
+PKG bigarray
+PKG sexplib
+PKG sexplib.0
+PKG unix
+S ../sublib

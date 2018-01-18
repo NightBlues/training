@@ -22,7 +22,7 @@ init_world = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
               0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 
-
+main :: IO ()
 main = Gloss.play window Gloss.white 1
        (create_world 10 init_world)
        draw_world
